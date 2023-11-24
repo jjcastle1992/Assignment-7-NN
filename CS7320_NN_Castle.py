@@ -14,10 +14,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 
-def data_cleaning(data):
-    # delete lines with null values
-    pass
-    # replace non-numrical data with numerical values
 
 def main():
     file_name = "7320.finaldata.csv"
@@ -27,12 +23,16 @@ def main():
     print(df.head())
     print(df.info())
 
+    # data cleaning
+
     df = df.dropna()  # Drop any rows with missing data
-    print(df.info())
+    print(df.info())  # have 3 columns (rank, state not in fl/int format
+    df.replace({'rank': {'LO': 0, 'MED': 1, 'HI': 2}}, inplace=True)
+    print(df.info())  # verify rank replaced with ints.
+    df.replace({'state': {'CAL': 0, 'NY': 1, 'TX': 3}}, inplace=True)
+    print(df.info())  # verify state replaced with ints
+    print(df.head())
 
-
-
-# Data Wrangling
 
 # Create NN and define hyperparams
 
