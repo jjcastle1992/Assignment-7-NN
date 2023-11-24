@@ -14,18 +14,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 
-
-def read_file(file_name):
-    try:
-        with open(file_name, 'r') as file:
-            data = list(csv.reader(file, delimiter=','))
-            file.close()
-            data = np.array(data)
-            return data
-
-    except FileNotFoundError:
-        return []
-
 def data_cleaning(data):
     # delete lines with null values
     pass
@@ -34,8 +22,13 @@ def data_cleaning(data):
 def main():
     file_name = "7320.finaldata.csv"
     # Read in file
-    raw_data = read_file(file_name)
-    print(raw_data.shape)
+    df = pd.read_csv(file_name, delimiter=",")
+
+    print(df.head())
+    print(df.info())
+
+    df = df.dropna()  # Drop any rows with missing data
+    print(df.info())
 
 
 
