@@ -3,8 +3,11 @@
 # Assignment 7: Neural Networks
 # This program represents the creation of a simple neural network that
 # predicts success (binary) based on a small set of input data.
-
-import torch
+import keras
+import numpy.random
+import tensorflow as tf
+import keras
+from keras import layers
 import numpy as np
 import pandas as pd
 import csv
@@ -29,16 +32,39 @@ def main():
     print(df.info())  # have 3 columns (rank, state not in fl/int format
     df.replace({'rank': {'LO': 0, 'MED': 1, 'HI': 2}}, inplace=True)
     print(df.info())  # verify rank replaced with ints.
-    df.replace({'state': {'CAL': 0, 'NY': 1, 'TX': 3}}, inplace=True)
+    df.replace({'state': {'CAL': 0, 'NY': 1, 'TX': 2}}, inplace=True)
     print(df.info())  # verify state replaced with ints
-    print(df.head())
+    print(df.head(10))
 
+    dataset = df.to_numpy()
+    seed = 0
+    numpy.random.seed(seed)
 
-# Create NN and define hyperparams
+    X = dataset[:, 0:7]
+    Y = dataset[:, 7]
+    print('done')
 
-# run NN
+    # 67% train, 33% test
+    X_train, X_test, y_train, y_test = train_test_split(X, Y,
+                                                        test_size=0.33,
+                                                        random_state=seed)
 
-# Print outputs for train-test accuracy
+    # Create NN and define hyperparams
+    model = keras.Sequential()
+    model.add(layers.Dense(16, input_shape=(7,), activation='relu'))  # for Part A
+    model.add(layers.Dense(1, activation='sigmoid'))  # output layer
+    print('Part A model constructed')
+    
+    # compile model
+    model.compile(loss="binary_crossentropy", optimizer='adam',
+                  metrics=['accuracy'])
+
+    # fit model
+    model.fit(X_train, y_train, validation_data=(X_test, y_test),
+              epochs=100, batch_size=32)
+    # run NN
+
+    # Print outputs for train-test accuracy
 
 main()
 
