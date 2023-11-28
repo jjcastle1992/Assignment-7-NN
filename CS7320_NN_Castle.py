@@ -5,11 +5,11 @@
 # predicts success (binary) based on a small set of input data.
 import keras
 import numpy.random
-import tensorflow as tf
 import keras
 from keras import layers
 import numpy as np
 import pandas as pd
+import time
 import csv
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -38,7 +38,7 @@ def main():
 
     dataset = df.to_numpy()
     seed = 0
-    numpy.random.seed(seed)
+    np.random.seed(seed)
 
     X = dataset[:, 0:7]
     Y = dataset[:, 7]
@@ -59,12 +59,12 @@ def main():
     model.compile(loss="binary_crossentropy", optimizer='adam',
                   metrics=['accuracy'])
 
+    tic = time.time()
     # fit model
     model.fit(X_train, y_train, validation_data=(X_test, y_test),
               epochs=100, batch_size=32)
-    # run NN
-
-    # Print outputs for train-test accuracy
+    toc = time.time()
+    print(f'{(toc - tic):.04f} seconds elapsed.')
 
 main()
 
