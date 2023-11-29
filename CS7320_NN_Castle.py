@@ -16,6 +16,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
+from sklearn.preprocessing import StandardScaler
 
 
 def main():
@@ -42,7 +43,6 @@ def main():
 
     X = dataset[:, 0:7]
     Y = dataset[:, 7]
-    print('done')
 
     # 67% train, 33% test
     X_train, X_test, y_train, y_test = train_test_split(X, Y,
@@ -65,6 +65,23 @@ def main():
               epochs=100, batch_size=32)
     toc = time.time()
     print(f'{(toc - tic):.04f} seconds elapsed.')
+
+    # Standardize Data for part B
+    scaler = StandardScaler()
+    X_train_std = scaler.fit_transform(X_train)
+    X_test_std = scaler.transform(X_test)
+
+
+
+    print('-------------START PART B: STANDARDIZED TEST-------------')
+    tic = time.time()
+    # fit model
+    model.fit(X_train_std, y_train, validation_data=(X_test_std, y_test),
+              epochs=100, batch_size=32)
+    toc = time.time()
+    print(f'{(toc - tic):.04f} seconds elapsed.')
+
+    print('done')
 
 main()
 
