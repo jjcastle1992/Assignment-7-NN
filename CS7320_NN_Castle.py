@@ -64,13 +64,13 @@ def main():
     model.compile(loss="binary_crossentropy", optimizer='adam',
                   metrics=['accuracy'])
 
-    # print('--------START PART A: Single Layer no std or decorr DF----')
-    # tic = time.time()
-    # # fit model
-    # model.fit(X_train, y_train, validation_data=(X_test, y_test),
-    #           epochs=100, batch_size=32)
-    # toc = time.time()
-    # print(f'{(toc - tic):.04f} seconds elapsed.')
+    print('--------START PART A: Single Layer no std or decorr DF----')
+    tic = time.time()
+    # fit model
+    model.fit(X_train, y_train, validation_data=(X_test, y_test),
+              epochs=100, batch_size=32)
+    toc = time.time()
+    print(f'{(toc - tic):.04f} seconds elapsed.')
 
     # Standardize Data for part B1
     scaler = StandardScaler()
@@ -80,14 +80,14 @@ def main():
 
     # *************** PART B **********
 
-    # print('-------------START PART B1: STANDARDIZED TEST-------------')
-    # tic = time.time()
-    # # fit model
-    # model.fit(X_train_std, y_train,
-    #           validation_data=(X_test_std, y_test), epochs=100,
-    #           batch_size=32)
-    # toc = time.time()
-    # print(f'{(toc - tic):.04f} seconds elapsed.')
+    print('-------------START PART B1: STANDARDIZED TEST-------------')
+    tic = time.time()
+    # fit model
+    model.fit(X_train_std, y_train,
+              validation_data=(X_test_std, y_test), epochs=100,
+              batch_size=32)
+    toc = time.time()
+    print(f'{(toc - tic):.04f} seconds elapsed.')
 
     # Check for and remove highly correlated data
     corrMatrix = df.corr()
@@ -540,8 +540,10 @@ def main():
     print(f'{(toc - tic):.04f} seconds elapsed.')
 
     # *************** EXP C15 ***************************************
-    # C15: batch size to 32. No correlation drops. 100 Epochs.
-    # C1 but use set first hidden layer to 8 neurons
+    # C15: batch size to 16. No correlation drops. 80 Epochs.
+    # Set Train:test to 30:70.
+    # Set optimizer to Nadam
+
     modelC15 = keras.Sequential()
     modelC15.add(layers.Dense(16, input_shape=(7,),
                               activation='relu'))
