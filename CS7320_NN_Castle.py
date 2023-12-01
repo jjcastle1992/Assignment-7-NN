@@ -572,6 +572,22 @@ def main():
 
     print('done')
 
+    """
+    Epoch 75/80
+    2/2 [==============================] - 0s 27ms/step - loss: 0.2619 - accuracy: 0.9655 - val_loss: 0.3936 - val_accuracy: 0.8551
+    Epoch 76/80
+    2/2 [==============================] - 0s 27ms/step - loss: 0.2566 - accuracy: 0.9655 - val_loss: 0.3918 - val_accuracy: 0.8551
+    Epoch 77/80
+    2/2 [==============================] - 0s 26ms/step - loss: 0.2514 - accuracy: 0.9655 - val_loss: 0.3902 - val_accuracy: 0.8551
+    Epoch 78/80
+    2/2 [==============================] - 0s 28ms/step - loss: 0.2457 - accuracy: 0.9655 - val_loss: 0.3888 - val_accuracy: 0.8551
+    Epoch 79/80
+    2/2 [==============================] - 0s 28ms/step - loss: 0.2406 - accuracy: 0.9655 - val_loss: 0.3875 - val_accuracy: 0.8406
+    Epoch 80/80
+    2/2 [==============================] - 0s 28ms/step - loss: 0.2359 - accuracy: 0.9655 - val_loss: 0.3863 - val_accuracy: 0.8406
+    3.1469 seconds elapsed.
+    """
+
 main()
 
 
