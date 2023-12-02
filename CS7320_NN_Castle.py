@@ -554,7 +554,7 @@ def main():
                      metrics=['accuracy'])
     print('Part C15 model constructed')
 
-    # 67% train, 33% test
+    # 30% train, 70% test
     X_train, X_test, y_train, y_test = train_test_split(X, Y,
                                                         test_size=0.70,
                                                         random_state=seed)
